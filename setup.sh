@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sudo airmon-ng check kill
-
 echo "[INFO] Configuring at0..."
 sudo ifconfig at0 up 10.0.0.1 netmask 255.255.255.0
 
@@ -36,7 +34,5 @@ sudo iptables -A FORWARD -i wlan0 -o at0 -m state --state ESTABLISHED,RELATED -j
 echo "[INFO] Starting dnsmasq..."
 sudo pkill dnsmasq
 sudo dnsmasq -C /etc/dnsmasq.conf -d &
-
-sudo service NetworkManager restart
 
 echo "[INFO] Done"
