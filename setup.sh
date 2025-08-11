@@ -28,10 +28,11 @@ sudo iptables --table nat --delete-chain
 
 sudo iptables -P FORWARD ACCEPT
 sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
-sudo iptables -A FORWARD -i at0 -o wlan0 -j ACCEPT
-sudo iptables -A FORWARD -i wlan0 -o at0 -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 sudo iptables -A FORWARD -i at0 -d 192.168.0.0/16 -j REJECT
+
+sudo iptables -A FORWARD -i at0 -o wlan0 -j ACCEPT
+sudo iptables -A FORWARD -i wlan0 -o at0 -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 echo "[INFO] Starting dnsmasq..."
 sudo pkill dnsmasq
